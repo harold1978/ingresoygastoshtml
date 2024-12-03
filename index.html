@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Ingresos y Gastos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input, select, button {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color:#45a049;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2b6b2f;
+        }
+        .alert {
+            color: red;
+        }
+        #resultados {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e2f7e3;
+            border-radius: 5px;
+        }
+        .informes{
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+        }
+        .informe{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .informe button{
+            border-radius: 1rem;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Registro de Ingresos y Gastos</h1>
+
+        <!-- Formulario para ingresar datos de ingreso -->
+        <h2>Registrar Ingreso</h2>
+        <form id="formIngreso">
+            <input type="text" id="descripcionIngreso" placeholder="Descripción del ingreso" required>
+            <input type="number" id="montoIngreso" placeholder="Monto" required>
+            <input type="date" id="fechaIngreso" required>
+            <select id="categoriaIngreso" required>
+                <option value="aguinaldo">Aguinaldo</option>
+                <option value="salario">Salarios</option>
+                <option value="beca">Becas</option>
+                <option value="ventas">Ventas</option>
+                <option value="inversiones">Inversiones</option>
+              </select>
+            <button type="submit">Registrar Ingreso</button>
+        </form>
+
+        <!-- Formulario para ingresar datos de gasto -->
+        <h2>Registrar Gasto</h2>
+        <form id="formGasto">
+            <input type="text" id="descripcionGasto" placeholder="Descripción del gasto" required>
+            <input type="number" id="montoGasto" placeholder="Monto" required>
+            <input type="date" id="fechaGasto" required>
+            <select id="categoriaGasto" required>
+                <option value="agua">Agua</option>
+                <option value="Electricidad">Electricidad</option>
+                <option value="internet">Internet</option>
+                <option value="telefono">Celular</option>
+                <option value="comida">Comida</option>
+                <option value="ropa">Ropa</option>
+                <option value="zapatos">Zapatos</option>
+                <option value="pollos">Pollos</option>
+                <option value="perros">Perros</option>
+                <option value="combustible">Combustible</option>
+                <option value="recreacion">Recreacion</option>
+                <option value="motocicleta">Motocicleta</option>
+                <option value="automovil">Automovil</option>
+                <option value="pasajes">Pasajes</option>
+              </select>
+            <select id="ingresoId" required></select>
+            <button id="btngasto" type="submit">Registrar Gasto</button>
+        </form>
+
+        <div>
+            <h2>LISTA DE GASTOS</h2>
+            <ul id="listgastos">
+
+            </ul>
+        </div>
+
+
+        <!-- Consultas para informes -->
+        <h2>Informes</h2>
+        <div class="informes">
+            <div class="informe">
+                <label for="ingresoIdInforme">Ingreso ID:</label>
+                <select id="ingresoIdInforme"></select><br>
+                <button id="btnTotalGastosIngreso">Total de Gastos por Ingreso</button>
+            </div>
+            <div class="informe">
+                <label for="fechaGastoInforme">Fecha:</label>
+                <input type="date" id="fechaGastoInforme" required>
+                <button id="btnGastosFechaIngreso">Gastos por Fecha e Ingreso</button>
+            </div>
+            <div class="informe">
+                <label for="categoriaIngresoInforme">Categoría de Ingreso:</label>
+                <input type="text" id="categoriaIngresoInforme" required>
+                <button id="btnIngresosPorTipo">Ingresos por Tipo</button>
+            </div>
+    
+ 
+        </div>
+
+        <div id="resultados"></div>
+
+        <script src="./app.js"></script>
+    </div>
+
+
+</body>
+</html>
