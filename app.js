@@ -1,5 +1,8 @@
-let ingresos = [];
-let gastos = [];
+let ingresos = [{descripcion:"salario dic 2024",monto:1300000,fecha:'2024-12-04',categoria:'salario'}];
+let gastos = [{descripcion:'compra comida',monto:10,fecha:'2024-12-04',categoria:'Comida',ingresoId:0},
+    {descripcion:'comida perro',monto:100,fecha:'2024-12-05',categoria:'Perros',ingresoId:1},
+    {descripcion:'pago electricidad dic 2024',monto:20,fecha:'2024-12-04',categoria:'Electricidad',ingresoId:0},
+    {descripcion:'servicio agua',monto:30,fecha:'2024-12-04',categoria:'Agua',ingresoId:0}];
 let editarBandera = null;
 
 
@@ -102,7 +105,60 @@ function editargasto(index){
     document.getElementById('btngasto').textContent = "Actualizar";
     editarBandera=index;
 }
+//informe por id ingreso
+document.getElementById('btnTotalGastosIngreso').addEventListener('click',()=>{
+   const ingreso = parseInt(document.getElementById('ingresoIdInforme').value);
+
+    if(ingreso>=0){
+        const datosfiltrados = gastos.filter(g=>g.ingresoId == ingreso );
+        let respuesta = 'DETALLES DE GASTOS POR INGRESO <br> <ul>';
+        datosfiltrados.forEach(dato => {
+            respuesta+='<li>'+dato.descripcion+' = '+ dato.monto + '</li>';
+        });
+        respuesta+='</ul>';
+        document.getElementById('resultados').innerHTML = respuesta;
+    }
+});
+
+//cambia formato fecha
+function covertirfecha(fecha){
+   const [dia,mes,anno] = fecha.split('-');
+   return new Date(`${anno}-${mes}-${dia}`);
+}
+//informe por fecha de gasto
+document.getElementById('btnGastosFechaIngreso').addEventListener('click',()=>{
+ 
+    const fechainforme = document.getElementById('fechaGastoInforme').value;
+    console.log('1'+fechainforme);
+    if(fechainforme){
+        console.log('2'+fechainforme);
+        console.log('3'+ gastos[1].fecha);
+  
+        const datosfiltrado = gastos.filter(gast=>gast.fecha === fechainforme);
+        let respuesta = 'DETALLES DE GASTOS POR FECHA <br> <ul>';
+        datosfiltrado.forEach(dato => {
+            respuesta+='<li>'+dato.descripcion+' = '+ dato.monto + '</li>';
+        });
+        respuesta+='</ul>';
+        document.getElementById('resultados').innerHTML = respuesta;
+    }
+});
+
+document.getElementById('btnGastoPorTipo').addEventListener('click',()=>{
+    const tipogasto = document.getElementById('categoriaGastoInforme').value;
+ 
+     if(tipogasto){
+         const datosfiltrados = gastos.filter(g=>g.categoria == tipogasto );
+         let respuesta = 'DETALLES DE GASTOS POR CATEGORIA <br> <ul>';
+         datosfiltrados.forEach(dato => {
+             respuesta+='<li>'+dato.descripcion+' = '+ dato.monto + '</li>';
+         });
+         respuesta+='</ul>';
+         document.getElementById('resultados').innerHTML = respuesta;
+     }
+ });
+
 
 //inicializar la carga de ingresos al cargar la pagina
-window.onload = cargarIngresoIds();
+window.onload = ()=>{cargarGastos();cargarIngresoIds();};
 
